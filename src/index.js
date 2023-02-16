@@ -1,14 +1,24 @@
-import React from 'react';
+ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+//Redux
+import {legacy_createStore as createStore} from 'redux'
+import { Provider } from 'react-redux';  // Provider wraps the application 
+// what it does is it flows the redux data through out the application
+import rootReducer from './service/reducers/index'
+const store = createStore(rootReducer)   // here we are keeping all the reducers in store
+console.warn("store" ,store)
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  // actions se reducer me data jata hai, reducer se store me data jata hai
+  // rootReducer me hamare sare reducer agaye the
+  // so Provide store ke andar ham reducer ka data put karenge 
+ <Provider store ={store}>
     <App />
-  </React.StrictMode>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
